@@ -25,6 +25,7 @@ namespace JN {
         
         void setPosition(glm::vec2  newPosition) { _position = newPosition; _needsMatrixUpdate = true; }
         void setScale(float newScale) { _scale = newScale; _needsMatrixUpdate = true; }
+        void flipY() { _isYFlipped = !_isYFlipped; _needsMatrixUpdate = true; }
         
         
         glm::vec2 convertScreenToWorld(glm::vec2 coords);
@@ -38,6 +39,7 @@ namespace JN {
         int _screenHeight;
         bool _needsMatrixUpdate;
         float _scale;
+        bool _isYFlipped = false;
         glm::mat4 _cameraMatrix;
         glm::mat4 _orthoMatrix;
         glm::vec2 _position;

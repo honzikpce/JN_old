@@ -25,29 +25,25 @@ include_directories(${OPENGL_INCLUDE_DIR})
 # SDL2 load
 find_package(SDL2 REQUIRED)
 include_directories(${SDL2_INCLUDE_DIR})
-#link_directories(${SDL2_LIBRARY_DIRS})
-#add_definitions(${SDL2_DEFINITIONS})
-
-# SDL_mixer and SDL_ttf
-#find_package(SDL_mixer REQUIRED)
-#find_package(SDL_ttf REQUIRED)
 
 # hardcoded - finding results to SDL1.0 lib!
 set(SDL_MIXER_LIBRARIES /Library/Frameworks/SDL2_mixer.framework)
 set(SDL_TTF_LIBRARIES /Library/Frameworks/SDL2_ttf.framework)
-message(SDL Mixer Library : ${SDL_MIXER_LIBRARIES})
-message(SDL TTF Library : ${SDL_TTF_LIBRARIES})
-message(TTF library found : ${SDL_TTF_FOUND})
+
 include_directories(SDL_MIXER_INCLUDE_DIRS)
 include_directories(SDL_TTF_INCLUDE_DIRS)
-message(SDL Mixer Includes :  ${SDL_MIXER_INCLUDE_DIRS})
-message(SDL TTF Includes : ${SDL_TTF_INCLUDE_DIRS})
-# load Box2d
-#set(BOX2D_LIB_PATH ~/Dropbox/dev)
-#FIND_LIBRARY(BOX2D_LIB
-#        NAMES Box2D
-#        PATHS ${BOX2D_LIB_PATH}
-#        )
+
+
+# load ROCKET framework
+set(ROCKET_LIB_PATH ~/Dropbox/dev/libs)
+set(JN_INC_PATH ~/Dropbox/dev/libs/Rocket.framework)
+
+FIND_LIBRARY(ROCKET_LIB
+        NAMES Rocket
+        PATHS ${ROCKET_LIB_PATH}
+        )
+INCLUDE(FindPackageHandleStandardArgs)
+FIND_PACKAGE_HANDLE_STANDARD_ARGS(Rocket REQUIRED_VARS ROCKET_LIB ROCKET_LIB_PATH)
 
 # ***** DEPENDENCIES ******
 
@@ -87,6 +83,6 @@ ENDMACRO()
 
 COPY_FILES_INTO_DIRECTORY_IF_CHANGED("${FrameworkHeaders}" "/Users/cablegibbon443/Dropbox/dev/JN.framework/Headers")
 
-target_link_libraries(JN ${OPENGL_LIBRARIES} ${SDL2_LIBRARY} ${SDL_MIXER_LIBRARIES} ${SDL_TTF_LIBRARIES})
+target_link_libraries(JN ${OPENGL_LIBRARIES} ${SDL2_LIBRARY} ${SDL_MIXER_LIBRARIES} ${SDL_TTF_LIBRARIES} ${ROCKET_LIB})
 
 

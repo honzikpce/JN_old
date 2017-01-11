@@ -49,7 +49,15 @@ IMainGame::~IMainGame() {
                 break;
             case SDL_KEYUP:
                 _controlMngr.releaseKey(evnt.key.keysym.sym);
-            // TODO : mouseMotion, buttonDown, Up, ...
+            case SDL_MOUSEBUTTONDOWN:
+                _controlMngr.pressKey(evnt.button.button);
+                break;
+            case SDL_MOUSEBUTTONUP:
+                _controlMngr.releaseKey(evnt.button.button);
+                break;
+            case SDL_MOUSEMOTION:
+                _controlMngr.setMouseCoords(evnt.motion.x, evnt.motion.y);
+
             default:
                 break;
         }

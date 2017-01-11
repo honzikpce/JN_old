@@ -38,7 +38,7 @@ namespace JN {
     
     IGameScreen * ScreenList::getCurrent() {
         if (_currentScreenIndex == SCREEN_INDEX_NO_SCREEN) return nullptr;
-        printf("returning %d as _currentScreenIndex\n", _currentScreenIndex);
+        //printf("returning %d as _currentScreenIndex\n", _currentScreenIndex);
         return _screens[_currentScreenIndex];
     }
     
